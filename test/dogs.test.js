@@ -31,7 +31,7 @@ describe('dog routes', () => {
       id: expect.any(Number),
       name: 'Pennington',
       breed: 'Mixed',
-      is_certified: false,
+      isCertified: false
     });
   };
 
@@ -55,6 +55,18 @@ describe('dog routes', () => {
           .then(({ body }) => {
             expect(body.length).toBe(3);
           });
+      });
+  });
+
+  it('gets a dog by id', () => {
+    return createDog()
+      .then(({ body }) => {
+        return request(app)
+          .get(`/api/v1/dogs/${body.id}`)
+          .expect(200);
+      })
+      .then(({ body }) => {
+        testDog(body);
       });
   });
 });
