@@ -69,4 +69,18 @@ describe('dog routes', () => {
         testDog(body);
       });
   });
+
+  it('can update the is_certified of a dog', () => {
+    return createDog()
+      .then(({ body }) => {
+        body.isCertified = true;
+        return request(app)
+          .patch(`/api/v1/dogs/${body.id}`)
+          .send(body)
+          .expect(200);
+      })
+      .then(({ body }) => {
+        expect(body.isCertified).toBeTruthy();
+      });
+  });
 });
