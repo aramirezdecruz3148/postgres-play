@@ -8,7 +8,7 @@ const child_process = require('child_process');
 describe('dog routes', () => {
  
   beforeEach(() => {
-    child_process.execFileSync('npm run recreate-tables');
+    child_process.execSync('npm run recreate-tables');
   });
 
   afterAll(() => {
@@ -17,7 +17,6 @@ describe('dog routes', () => {
 
   const TEST_DOG = {
     name: 'Pennington',
-    age: 8,
     breed: 'Mixed',
     isCertified: false
   };
@@ -31,9 +30,8 @@ describe('dog routes', () => {
     expect(dog).toEqual({
       id: expect.any(Number),
       name: 'Pennington',
-      age: 8,
       breed: 'Mixed',
-      isCertified: false,
+      is_certified: false,
     });
   };
 
