@@ -83,4 +83,17 @@ describe('dog routes', () => {
         expect(body.isCertified).toBeTruthy();
       });
   });
+
+  it('can delete a dog by id', () => {
+    return createDog()
+      .then(({ body }) => {
+        return request(app)
+          .delete(`/api/v1/dogs/${body.id}`)
+          .expect(200)
+          .then(({ body: removed }) => {
+            expect(removed).toEqual(body);
+            return body.id;
+          });
+      });
+  });
 });
